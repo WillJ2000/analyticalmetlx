@@ -97,3 +97,164 @@ If this is a fresh checkout then (on Mac/Linux) you'll first need to make the sh
 MeTL has a CI pipeline on CircleCI, at:
 
 [https://circleci.com/gh/StackableRegiments/analyticalmetlx]
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MeTl Text Editor</title>
+    <style>
+    div#textEditor{
+	margin: 0 auto;
+	width: 750px;
+	height: 300px;
+}
+div#theRibbon{
+	border-bottom: none;
+	padding: 10px;
+	background-color: rgb(40,110,89);
+	color: white;
+	border-radius: 8px 8px 0px 0px;
+}
+div#richTextArea{
+	border: 2px solid rgb(40,110,89);
+	height: 100%;
+	width: 746px;
+}
+iframe#theWYSIWYG{
+	height: 100%;
+	width: 100%;
+}
+div#theRibbon > button {
+	color: white;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+   }
+   div#theRibbon > button: hover{
+   	background-color: rgb(20,90,70);
+    transition: all 0.3s linear 0s;
+    }
+    input[type="color"]{
+    border:none;
+    outline: none;
+    background-color: transparent;
+    }
+	</style>
+	<script>
+		window.addEventListener("load",function(){
+			var editor = theWYSIWYG.document;
+			editor.designMode = "on";
+			
+			boldButton.addEventListener("click", function(){
+			editor.execCommand("Bold", false, null);
+			},false);
+			
+			italicButton.addEventListener("click", function(){
+			editor.execCommand("Italic", false, null);
+			},false);
+			
+			supButton.addEventListener("click", function(){
+				editor.execCommand("Superscript", false, null);
+			},false);
+		
+			subButton.addEventListener("click", function(){
+				editor.execCommand("Subscript", false, null);
+			},false);
+			
+			strikeButton.addEventListener("click", function(){
+				editor.execCommand("Strikethrough", false, null);
+			},false);
+		
+			orderedListButton.addEventListener("click", function(){
+				editor.execCommand("InsertOrderedList", false, "newOL" + Math.round(Math.random() * 1000));
+			},false);
+		
+			unorderedListButton.addEventListener("click", function(){
+				editor.execCommand("InsertUnOrderedList", false, "newOL" + Math.round(Math.random() * 1000));
+			},false);
+			
+			fontColorButton.addEventListener("change", function(event){
+				editor.execCommand("ForeColor", false, event.target.value);
+			},false);
+
+			highlightButton.addEventListener("change", function(event){
+				editor.execCommand("BackColor", false, event.target.value);
+			},false);
+		
+			fontChanger.addEventListener("change", function(event){
+				editor.execCommand("FontName", false, event.target.value);
+			},false);	
+	
+			fontSizeChanger.addEventListener("change", function(event){
+				editor.execCommand("FontSize", false, event.target.value);
+			},false);	
+				
+			linkButton.addEventListener("click", function(){
+				var url = prompt("Enter a URL", "http://");
+				editor.execCommand("CreateLink", false, url);
+			},false);
+	
+			unLinkButton.addEventListener("click", function(){
+				editor.execCommand("UnLink", false, null);
+			},false);
+	
+			undoButton.addEventListener("click", function(){
+				editor.execCommand("undo",false,null);
+			},false);
+			
+			redoButton.addEventListener("click", function(){
+				editor.execCommand("redo",false,null);
+			},false);
+			
+	},false);
+	
+	
+		
+	</script>
+</head>
+<body>
+	<div id="textEditor">
+		<div id="theRibbon"> 
+		<button id="boldButton" title="Bold"><b>B</b></button>
+			<button id="italicButton" title="Italic"><i>I</i></button>
+			<button id="supButton" title="Superscript">X<sup>2</sup></button>
+			<button id="subButton" title="Subscript">X<sub>2</sub></button>
+			<button id="strikeButton" title="Strikethrough"><s>abc</s></button>
+			<button id="orderedListButton" title="Numbered List">(1)</button>
+			<button id="unorderedListButton" title="Bullet List">&bull;</button>
+            <input type="color" id="fontColorButton" title="Change Font Color">
+			<input type="color" id="highlightButton" title="Highlight Text">
+            <select id="fontChanger">
+				<option value="Times New Roman">Times New Roman</option>
+				<option value="Consolas">Consolas</option>
+				<option value="Tahoma">Tahoma</option>
+				<option value="monospace">Monospace</option>
+				<option value="cursive">Cursive</option>
+				<option value="sans-serif">Sans-Serif</option>
+				<option value="Calibri">Calibri</option>
+			</select>            
+			<select id="fontSizeChanger">
+				<script>
+					for(var i = 1; i < 10; i++){
+						document.write("<option value='"+i+"'>"+i+ "</option>");
+					}
+				</script>
+			</select>        
+			<button id="linkButton" title="Create Link">Link</button>
+			<button id="unlinkButton" title="Remove Link">Unlink</button>
+			<button id="undoButton" title="Undo the previous action">&larr;</button>
+			<button id="redoButton" title="Redo">&rarr;</button>
+		</div>
+		<div id="richTextArea">
+			<iframe id="theWYSIWYG" name="theWYSIWYG" frameborder="0"> </iframe>            
+   		 </div>
+	</div>
+	<script>
+		var fonts = document.querySelectorAll ("select#fontChanger > option");
+		for (var i = 0; i < fonts.length; i++){
+			fonts[i].style.fontFamily = fonts[i].value;
+			}
+			</script>
+</body>
+</html>
